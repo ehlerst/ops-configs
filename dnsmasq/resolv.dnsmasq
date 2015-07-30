@@ -1,0 +1,5 @@
+nameserver 4.2.2.2
+nameserver 8.8.8.8
+### Comcast
+nameserver 75.75.75.75
+nameserver 75.75.76.76
