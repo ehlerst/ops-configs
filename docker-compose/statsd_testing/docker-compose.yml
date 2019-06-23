@@ -1,0 +1,22 @@
+version: "3"
+services:
+  carbon:
+    network_mode: host
+    image: ehlers320/carbon-c-relay
+    container_name: carbon
+    entrypoint: ["carbon-c-relay", "-f", "/etc/carbon-c-relay/carbon-c-relay.conf", "-d"]
+    restart: always
+    ports:
+     - "2003:2003"
+    volumes:
+      - ./carbon-c-relay.conf:/etc/carbon-c-relay/carbon-c-relay.conf:ro
+  telegraf:
+    network_mode: host
+    image: telegraf:1.11.0
+    container_name: telegraf
+    ports: 
+      - "8125:8125/udp"
+    depends_on:
+      - carbon
+    volumes:
+      - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
